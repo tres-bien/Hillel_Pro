@@ -22,6 +22,14 @@ namespace MyProject
                 Month = 1,
                 Year = 2000,
             });
+            
+            reminder.Create(new ToDoList
+            {
+                Name = "Sleep",
+                Day = 10,
+                Month = 12,
+                Year = 2000,
+            });
 
             reminder.ShowAll();
 
