@@ -98,6 +98,20 @@ namespace Homework_1
                     NewLine();
                     return false;
 
+                case EnumType.Seven:
+                    break;
+                case EnumType.Eight:
+                    break;
+                case EnumType.Nine:
+                    break;
+                case EnumType.Ten:
+                    break;
+                case EnumType.Eleven:
+                    break;
+                case EnumType.Twelve:
+                    break;
+                case EnumType.Thirteen:
+                    break;
                 default:
                     return false;
             }
