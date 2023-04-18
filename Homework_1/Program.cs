@@ -1,5 +1,4 @@
 ﻿using Homework_1;
-using MyProject;
 
 namespace Hillel_Pro
 {

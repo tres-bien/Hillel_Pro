@@ -10,15 +10,17 @@ namespace Homework_1
     {
         public string Name { get; set; }
         public int Id { get; set; }
-        public byte Day { get; set; }
-        public byte Month { get; set; }
-        public int Year { get; set; }
-        public byte Hours { get; set; }
-        public byte Minutes { get; set; }
+        public ConsoleColor Color { get; set; }
+        public DateTime DateTime { get; set; }
+        //public byte Day { get; set; }
+        //public byte Month { get; set; }
+        //public int Year { get; set; }
+        //public byte Hours { get; set; }
+        //public byte Minutes { get; set; }
 
         public override string ToString()
         {
-            return $"{Id}, {Day}/{Month}/{Year}, {Hours}:{Minutes} {Name};";
+            return $"{Id}, {DateTime}, {Name}, {Color};";
         }
     }
 }

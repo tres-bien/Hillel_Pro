@@ -50,7 +50,6 @@ namespace Homework_1
         public virtual void Update(IToDoList task)
         {
             var newTask = GetById(task.Id);
-
         }
 
         public virtual IToDoList GetById(int id)

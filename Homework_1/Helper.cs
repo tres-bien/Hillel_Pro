@@ -1,43 +1,28 @@
-﻿using Homework_1;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyProject
+namespace Homework_1
 {
     internal struct Helper
     {
         public static void Run()
         {
-            var doingsList = new DoingsList();
+            //var doingsList = new DoingsList();
+            var fileProcessor = new FileProcessor();
+            fileProcessor.Get();
 
-            var reminder = new ReminderList(doingsList);
+            var reminder = new ReminderList(fileProcessor);
+            var eventlist = new EventList(fileProcessor);
+            var task = new TaskList(fileProcessor);
+            reminder.SaveEvent += fileProcessor.Save;
+            eventlist.SaveEvent += fileProcessor.Save;
+            task.SaveEvent += fileProcessor.Save;
 
-            reminder.Create(new ToDoList
-            {
-                Name = "Eat",
-                Day = 1,
-                Month = 1,
-                Year = 2000,
-            });
-            
-            reminder.Create(new ToDoList
-            {
-                Name = "Sleep",
-                Day = 10,
-                Month = 12,
-                Year = 2000,
-            });
-
-            reminder.ShowAll();
-
-            var eventlist = new EventList(doingsList);
-            var task = new TaskList(doingsList);
-            task.Create(new ToDoList { Name = "Work", Day = 1, Month = 1, Year = 3000 });
-
-            task.ShowAll();
+            var meny = new Meny();
+            meny.Run(eventlist, reminder, task);
         }
     }
 }

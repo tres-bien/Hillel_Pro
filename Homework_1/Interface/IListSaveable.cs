@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Homework_1
 {
-    internal interface IToDoList : IData
+    internal interface IListSaveable
     {
-        string Name { get; set; }
-        int Id { get; set; }
-        ConsoleColor Color { get; set; }
+        bool Save(IEnumerable<IToDoList> items);
     }
 }
