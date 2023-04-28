@@ -99,19 +99,20 @@ namespace Homework_1
                     return false;
 
                 case EnumType.Seven:
-                    break;
+
+                    return false;
                 case EnumType.Eight:
-                    break;
+                    return false;
                 case EnumType.Nine:
-                    break;
+                    return false;
                 case EnumType.Ten:
-                    break;
+                    return false;
                 case EnumType.Eleven:
-                    break;
+                    return false;
                 case EnumType.Twelve:
-                    break;
+                    return false;
                 case EnumType.Thirteen:
-                    break;
+                    return false;
                 default:
                     return false;
             }
