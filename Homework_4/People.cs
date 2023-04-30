@@ -93,11 +93,10 @@ namespace Homework_4
         {
             for (int i = 0; i < persons.Count; i++)
             {
-                var a = persons.ElementAt(i);
-                for (int j = 0; j < a.Value.Count(); j++)
+                for (int j = 0; j < persons.ElementAt(i).Value.Count(); j++)
                 {
-                    Console.Write(a.Key[j] + " ");
-                    Console.WriteLine(a.Value[j]);
+                    Console.Write(persons.ElementAt(i).Key[j] + " ");
+                    Console.WriteLine(persons.ElementAt(i).Value[j]);
                 }
             }
         }
