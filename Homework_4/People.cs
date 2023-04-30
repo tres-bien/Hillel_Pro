@@ -51,17 +51,6 @@ namespace Homework_4
             return a;
         }
 
-        public KeyValuePair<TKey, TValue> GetPenultimate<TKey, TValue>(Dictionary<TKey, TValue> dictionary)
-        {
-            return dictionary.ElementAt(dictionary.Count - 2);
-        }
-
-
-        public IPerson GetPenultimate(IEnumerable<IPerson> person)
-        {
-            return person.ElementAt(person.Count() - 2);
-        }
-
         public void Show()
         {
             foreach (IPerson person in _people)

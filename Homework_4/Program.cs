@@ -20,17 +20,17 @@
             Console.WriteLine();
             people.Show(people.FilterByAgeMore(20));
             Console.WriteLine();
-            people.Show(people.GetPenultimate(people.FilterByAgeMore(20)));
+            people.Show(people.FilterByAgeMore(20).GetPenultimate());
 
             Console.WriteLine();
             people.Show(people.FilterByAgeAndSortAlfabetical(20));
             Console.WriteLine();
-            people.Show(people.GetPenultimate(people.FilterByAgeAndSortAlfabetical(20)));
+            people.Show(people.FilterByAgeAndSortAlfabetical(20).GetPenultimate());
 
             Console.WriteLine();
             people.Show(people.FilterByAgeAndGroupByAge(20));
             Console.WriteLine();
-            people.Show(people.GetPenultimate(people.FilterByAgeAndGroupByAge(20)));
+            people.Show(people.FilterByAgeAndGroupByAge(20).GetPenultimate());
         }
 
         private static void SumOfOddSquaredNumbers()
