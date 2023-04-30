@@ -39,21 +39,23 @@ namespace Homework_4
         {
             return FilterByAgeMore(age)
                   .Select(_people => new { _people.Id, _people.Name })
-                  .OrderBy(x => x.Name).ToDictionary(x => x.Id, y => y.Name);
+                  .OrderBy(x => x.Name).ToDictionary(x => x.Id, x => x.Name);
         }
 
-        public Dictionary<int, string> FilterByAgeAndGroupByAge(byte age)
+        public Dictionary<int[], string[]> FilterByAgeAndGroupByAge(byte age)
         {
-            return FilterByAgeMore(age)
+            var a = FilterByAgeMore(age)
                   .OrderBy(x => x.Age)
-                  .Select(_people => new { _people.Id, _people.Name })
-                  .ToDictionary(x => x.Id, y => y.Name);
+                  .GroupBy(x => x.Age, x => new { Id = x.Id, Name = x.Name })
+                  .ToDictionary(Id => Id.Select(x => x.Id).ToArray(), Name => Name.Select(x => x.Name).ToArray());
+            return a;
         }
 
-        public KeyValuePair<int, string> GetPenultimate(Dictionary<int, string> dictionary)
+        public KeyValuePair<TKey, TValue> GetPenultimate<TKey, TValue>(Dictionary<TKey, TValue> dictionary)
         {
             return dictionary.ElementAt(dictionary.Count - 2);
         }
+
 
         public IPerson GetPenultimate(IEnumerable<IPerson> person)
         {
@@ -73,12 +75,34 @@ namespace Homework_4
             Console.WriteLine(person);
         }
 
-        public void Show(KeyValuePair<int, string> person)
+        public void Show<TKey, TValue>(KeyValuePair<TKey[], TValue[]> persons)
         {
-            Console.WriteLine(person.Key + person.Value);
+            for (int i = 0; i < persons.Value.Count(); i++)
+            {
+                Console.Write(persons.Key[i] + " ");
+                Console.WriteLine(persons.Value[i]);
+            }
         }
 
-        public void Show(Dictionary<int, string> persons)
+        public void Show<TKey, TValue>(KeyValuePair<TKey, TValue> persons)
+        {
+            Console.WriteLine(persons.Key + " " + persons.Value);
+        }
+
+        public void Show<TKey, TValue>(Dictionary<TKey[], TValue[]> persons)
+        {
+            for (int i = 0; i < persons.Count; i++)
+            {
+                var a = persons.ElementAt(i);
+                for (int j = 0; j < a.Value.Count(); j++)
+                {
+                    Console.Write(a.Key[j] + " ");
+                    Console.WriteLine(a.Value[j]);
+                }
+            }
+        }
+
+        public void Show<TKey, TValue>(Dictionary<TKey, TValue> persons)
         {
             foreach (var person in persons)
             {
