@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Drawing.Configuration;
 
 namespace Homework_5
@@ -22,7 +23,19 @@ namespace Homework_5
 
         private void bSearch_Click(object sender, EventArgs e)
         {
+            if (this.richTextBox1.Text.Contains(tWordSearch.Text))
+            {
+                int index = -1;
+                int selectStart = this.richTextBox1.SelectionStart;
 
+                while ((index = this.richTextBox1.Text.IndexOf(tWordSearch.Text, (index + 1))) != -1)
+                {
+                    this.richTextBox1.Select((index), tWordSearch.Text.Length);
+                    this.richTextBox1.SelectionBackColor = Color.Tan;
+                    this.richTextBox1.Select(selectStart, 0);
+                    this.richTextBox1.SelectionBackColor = Color.Black;
+                }
+            }
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -30,6 +43,9 @@ namespace Homework_5
             var task1 = Task.Run(() => Read(1000, Color.Aqua));
             var task2 = Task.Run(() => Read(100, Color.Yellow));
             var task3 = Task.Run(() => Read(500, Color.Green));
+        }
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
         }
 
         private List<string> GetPaths()
@@ -52,7 +68,7 @@ namespace Homework_5
             }
         }
 
-        public async void Write(string text, Color color)
+        public async void Write(string text, Color color, string searchWord = null)
         {
             lock (mock)
             {
@@ -60,10 +76,6 @@ namespace Homework_5
                 this.Invoke(new Action(() => richTextBox1.SelectionColor = color));
                 this.Invoke(new Action(() => richTextBox1.AppendText(text + "\n")));
             }
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
         }
     }
 }
