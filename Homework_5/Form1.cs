@@ -46,7 +46,6 @@ namespace Homework_5
                 var readStream = new StreamReader(File.OpenRead(path));
                 while (!readStream.EndOfStream)
                 {
-                    //text = await readStream.ReadLineAsync();
                     Write(await readStream.ReadLineAsync(), color);
                 }
                 await Task.Delay(delay);
@@ -57,11 +56,14 @@ namespace Homework_5
         {
             lock (mock)
             {
-                this.Invoke(new Action(() => tDisplayText.BackColor = Color.Black));
-                tDisplayText.ForeColor = color;
-                this.Invoke(new Action(() => tDisplayText.Text += text));
-                //tDisplayText.ForeColor = Color.Empty;
+                this.Invoke(new Action(() => richTextBox1.BackColor = Color.Black));
+                this.Invoke(new Action(() => richTextBox1.SelectionColor = color));
+                this.Invoke(new Action(() => richTextBox1.AppendText(text + "\n")));
             }
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
         }
     }
 }

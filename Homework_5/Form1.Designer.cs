@@ -30,11 +30,11 @@
         {
             splitContainer1 = new SplitContainer();
             splitContainer3 = new SplitContainer();
-            tDisplayText = new TextBox();
             tWordSearch = new TextBox();
             splitContainer2 = new SplitContainer();
             bShow = new Button();
             bSearch = new Button();
+            richTextBox1 = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -78,7 +78,7 @@
             // 
             // splitContainer3.Panel1
             // 
-            splitContainer3.Panel1.Controls.Add(tDisplayText);
+            splitContainer3.Panel1.Controls.Add(richTextBox1);
             // 
             // splitContainer3.Panel2
             // 
@@ -87,17 +87,6 @@
             splitContainer3.SplitterDistance = 278;
             splitContainer3.SplitterWidth = 1;
             splitContainer3.TabIndex = 2;
-            // 
-            // tDisplayText
-            // 
-            tDisplayText.Dock = DockStyle.Fill;
-            tDisplayText.Location = new Point(0, 0);
-            tDisplayText.MaxLength = 300;
-            tDisplayText.Multiline = true;
-            tDisplayText.Name = "tDisplayText";
-            tDisplayText.ScrollBars = ScrollBars.Vertical;
-            tDisplayText.Size = new Size(661, 278);
-            tDisplayText.TabIndex = 1;
             // 
             // tWordSearch
             // 
@@ -149,6 +138,17 @@
             bSearch.UseVisualStyleBackColor = true;
             bSearch.Click += bSearch_Click;
             // 
+            // richTextBox1
+            // 
+            richTextBox1.Dock = DockStyle.Fill;
+            richTextBox1.Location = new Point(0, 0);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ScrollBars = RichTextBoxScrollBars.Vertical;
+            richTextBox1.Size = new Size(661, 278);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
+            // 
             // fWordSearcher
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -165,7 +165,6 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             splitContainer3.Panel1.ResumeLayout(false);
-            splitContainer3.Panel1.PerformLayout();
             splitContainer3.Panel2.ResumeLayout(false);
             splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
@@ -179,11 +178,11 @@
 
         #endregion
         private SplitContainer splitContainer1;
-        private TextBox tDisplayText;
         private Button bSearch;
         private SplitContainer splitContainer2;
         private Button bShow;
         private SplitContainer splitContainer3;
         private TextBox tWordSearch;
+        private RichTextBox richTextBox1;
     }
 }
