@@ -1,5 +1,7 @@
 using System.Drawing;
 using System.Drawing.Configuration;
+using System.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Homework_5
 {
@@ -40,10 +42,19 @@ namespace Homework_5
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            var task1 = Task.Run(() => Read(1000, Color.Aqua));
-            var task2 = Task.Run(() => Read(100, Color.Yellow));
-            var task3 = Task.Run(() => Read(500, Color.Green));
+            var tokenSource = new CancellationTokenSource();
+
+            var task1 = Task.Run(() => Read(10, Color.Aqua, tokenSource.Token));
+            var task2 = Task.Run(() => Read(1000, Color.Yellow, tokenSource.Token));
+            var task3 = Task.Run(() => Read(5000, Color.Green, tokenSource.Token));
+
+            await Task.WhenAny(task1, task2, task3);
+            tokenSource.Cancel();
+
+            this.Invoke(new Action(() => richTextBox1.SelectionColor = Color.Red));
+            this.Invoke(new Action(() => richTextBox1.AppendText("\nFinished")));
         }
+
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
         }
@@ -54,21 +65,24 @@ namespace Homework_5
             return paths;
         }
 
-        public async Task Read(int delay, Color color)
+        public async Task Read(int delay, Color color, CancellationToken token)
         {
             string text = string.Empty;
             foreach (string path in GetPaths())
             {
                 var readStream = new StreamReader(File.OpenRead(path));
+
                 while (!readStream.EndOfStream)
                 {
                     Write(await readStream.ReadLineAsync(), color);
                 }
-                await Task.Delay(delay);
+
+                if (token.IsCancellationRequested) return;
+                await Task.Delay(delay, token);
             }
         }
 
-        public async void Write(string text, Color color, string searchWord = null)
+        public async Task Write(string text, Color color, string searchWord = null)
         {
             lock (mock)
             {
