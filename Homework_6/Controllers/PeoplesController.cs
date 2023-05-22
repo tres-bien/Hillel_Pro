@@ -22,7 +22,7 @@ namespace Homework_6.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPersonById(Guid id)
+        public async Task<ActionResult<Person>> GetPersonById(int id)
         {
             var person = await _peopleService.GetPersonById(id);
             if (person == null)
@@ -38,7 +38,7 @@ namespace Homework_6.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Person>> RemovePersonById(Guid id)
+        public async Task<ActionResult<Person>> RemovePersonById(int id)
         {
             var person = await _peopleService.RemovePersonById(id);
             if (person == null)
@@ -48,7 +48,7 @@ namespace Homework_6.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<List<Person>>> UpdatePersonById(Guid id, Person request)
+        public async Task<ActionResult<List<Person>>> UpdatePersonById(int id, Person request)
         {
             var person = await _peopleService.UpdatePersonById(id, request);
             if (person == null)

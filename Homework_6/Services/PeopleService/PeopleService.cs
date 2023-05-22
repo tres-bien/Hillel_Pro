@@ -17,7 +17,7 @@ namespace Homework_6.Services.PeopleService
         {
             var person = new Person
             { 
-                Id = Guid.NewGuid(),
+                Id = await _context.Person.CountAsync(),
                 FirstName = newPerson.FirstName,
                 LastName = newPerson.LastName,
                 Age = newPerson.Age
@@ -34,13 +34,13 @@ namespace Homework_6.Services.PeopleService
             return await _context.Person.ToListAsync();
         }
 
-        public async Task<Person?> GetPersonById(Guid id)
+        public async Task<Person?> GetPersonById(int id)
         {
             var person = await GetById(id);
             return person;
         }
 
-        public async Task<List<Person>?> RemovePersonById(Guid id)
+        public async Task<List<Person>?> RemovePersonById(int id)
         {
             var person = await GetById(id);
             _context.Person.Remove(person);
@@ -49,7 +49,7 @@ namespace Homework_6.Services.PeopleService
             return await _context.Person.ToListAsync();
         }
 
-        public async Task<List<Person>?> UpdatePersonById(Guid id, Person request)
+        public async Task<List<Person>?> UpdatePersonById(int id, Person request)
         {
             var person = await GetById(id, request);
 
@@ -62,14 +62,14 @@ namespace Homework_6.Services.PeopleService
             return await _context.Person.ToListAsync();
         }
 
-        private async Task<Person?> GetById(Guid id)
+        private async Task<Person?> GetById(int id)
         {
             var person = await _context.Person.FindAsync(id);
             if (person == null) return null;
             return person;
         }
 
-        private async Task<Person?> GetById(Guid id, Person request)
+        private async Task<Person?> GetById(int id, Person request)
         {
             var person = await _context.Person.FindAsync(id);
             if (person == null) return null;
