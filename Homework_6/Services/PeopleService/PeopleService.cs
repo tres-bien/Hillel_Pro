@@ -13,20 +13,17 @@ namespace Homework_6.Services.PeopleService
             _context = context;
         }
 
-        public async Task<List<Person>> CreatePerson(CreatePersonRequest newPerson)
+        public async Task<Person> CreatePerson(CreatePersonRequest newPerson)
         {
             var person = new Person
             { 
-                Id = await _context.Person.CountAsync(),
                 FirstName = newPerson.FirstName,
                 LastName = newPerson.LastName,
                 Age = newPerson.Age
             };
-            //_context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT Person ON");
-            await _context.Person.AddAsync(person);
+            _context.Person.Add(person);
             await _context.SaveChangesAsync();
-            //_context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT Person OFF");
-            return await _context.Person.ToListAsync();
+            return person;
         }
 
         public async Task<List<Person>> GetPeople()

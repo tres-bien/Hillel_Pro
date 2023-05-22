@@ -15,6 +15,12 @@ namespace Homework_6.Data
             optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=peopledb;Trusted_Connection=true;TrustServerCertificate=true;");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Person>().HasKey(x => x.Id);
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Person> Person { get; set; }
     }
 }
