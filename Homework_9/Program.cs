@@ -70,18 +70,6 @@ namespace Homework_9
             return str;
         }
 
-        static string GetAllFields2<T>(T baseClass)
-        {
-            string str = string.Empty;
-            foreach (var item in baseClass.GetType().GetFields())
-            {
-                var attribute = Attribute.GetCustomAttribute(item, typeof(DisplayNameAttribute)) as DisplayNameAttribute;
-                var name = attribute?.Name;
-                str += $"{name ?? item.Name}:{item.GetValue(baseClass)};";
-            }
-            return str;
-        }
-
         static T SaveValue<T>(string prop, T obj)
         {
             var a = StringArr(prop);
