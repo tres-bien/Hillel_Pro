@@ -33,7 +33,8 @@ namespace Homework_9
             Console.WriteLine("_________");
 
             Console.WriteLine(GetAllFields(SaveValue(GetAllFields(baseClass), baseClass)));
-            //SaveValue("name", baseClass, "Eshly");
+            SaveValue("name", baseClass, "Eshly");
+            Console.WriteLine(GetAllFields(baseClass));
         }
 
 
@@ -93,10 +94,11 @@ namespace Homework_9
                     {
                         if (a[i][j] == "DisplayNameAttribute")
                         {
-
+                            SetFieldWithAttribute(obj, a, newType, i);
                         }
                     }
                 }
+                else
                 SetField(obj, a, newType, i);
             }
             return obj;
@@ -110,6 +112,16 @@ namespace Homework_9
             }
             else
                 newType.GetType().GetField(a[i][0]).SetValue(obj, a[i][1]);
+        }
+        
+        static void SetFieldWithAttribute<T>(T obj, List<List<string>> a, object? newType, int i)
+        {
+            if (int.TryParse((a[i][1]), out int value))
+            {
+                newType.GetType().GetField("number").SetValue(obj, int.Parse(a[i][1]));
+            }
+            else
+                newType.GetType().GetField("name").SetValue(obj, a[i][1]);
         }
 
         static List<List<string>> StringArr(string prop)
